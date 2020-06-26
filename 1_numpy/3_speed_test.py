@@ -15,9 +15,10 @@ def dot_product_by_hand(a,b):
         result+= e*g
     return result
 
+def dot_product_by_hand_list_compr(a,b):
+    return np.sum([e*g for e,g in zip(a,b)])
+
 def dot_product_numpy(a,b):
-    a = np.array(a)
-    b = np.array(b)
     return a.dot(b)
 
 th1 = time.time()
@@ -32,8 +33,17 @@ tn2 = time.time()
 n_time = tn2-tn1
 print('Done dot product with numpy, result is',n,'elapsed time:',n_time)
 
-print('numpy calculation is',h_time/n_time,'times faster than by hand calculation')
+tl1 = time.time()
+tl = dot_product_by_hand_list_compr(a,b)
+tl2 = time.time()
+tl_time = tl2-tl1
+print('Done dot product by hand with list comprehension, result is',tl,'elapsed time:',tl_time)
 
+print('\n')
+print('numpy calculation is',h_time/n_time,'times faster than by hand calculation')
+print('numpy calculation is',tl_time/n_time,'times faster than by hand calculation with list comprehension')
+
+print('\n')
 print('For more intense calculations numpy is even faster!')
 t_interval = 100000
 print('dot products',t_interval,'times')
@@ -50,4 +60,11 @@ for i in range(t_interval):
 tn4 = time.time()
 n_time2 = tn4-tn3
 
+tl3 = time.time()
+for i in range(t_interval):
+    dot_product_by_hand_list_compr(a,b)
+tl4 = time.time()
+tl_time2 = tl4-tl3
+
 print('this time numpy calculation is',h_time2/n_time2,'times faster than by hand calculation')
+print('numpy calculation is also',tl_time2/n_time2,'times faster than by hand calculation with list comprehension')
