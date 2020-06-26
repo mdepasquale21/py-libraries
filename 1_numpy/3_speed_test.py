@@ -32,4 +32,22 @@ tn2 = time.time()
 n_time = tn2-tn1
 print('Done dot product with numpy, result is',n,'elapsed time:',n_time)
 
-print('numpy calculation is',h_time/n_time,'times faster than by hand calculations')
+print('numpy calculation is',h_time/n_time,'times faster than by hand calculation')
+
+print('For more intense calculations numpy is even faster!')
+t_interval = 100000
+print('dot products',t_interval,'times')
+
+th3 = time.time()
+for i in range(t_interval):
+    dot_product_by_hand(a,b)
+th4 = time.time()
+h_time2 = th4-th3
+
+tn3 = time.time()
+for i in range(t_interval):
+    dot_product_numpy(a,b)
+tn4 = time.time()
+n_time2 = tn4-tn3
+
+print('this time numpy calculation is',h_time2/n_time2,'times faster than by hand calculation')
