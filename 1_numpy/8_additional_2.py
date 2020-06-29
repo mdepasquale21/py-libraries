@@ -47,3 +47,5 @@ t4 = time.time()
 nt = t4-t3
 
 print('numpy calculation is',ht/nt,'times faster than by hand calculation')
+
+# numpy calculation is on average about 10'000 times faster than by hand list calculation!!!!!
