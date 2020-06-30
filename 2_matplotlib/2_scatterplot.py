@@ -4,6 +4,7 @@ print('SCATTERPLOT')
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import matplotlib
 
 print('2-D')
 data2D = np.random.randn(300,2)
@@ -21,11 +22,18 @@ data2D_classes = np.random.randn(300,2)
 data2D_classes[:150,0] +=2.5
 data2D_classes[:150,1] +=1.5
 
+# create labels
+labels = np.zeros(300)
+labels[:150] = 1
+labels[150:] = 0
+classes = np.unique(labels) # basically [0,1] but like this is more general!
+
 plt.xlabel('x')
 plt.ylabel('y', rotation=0)
-plt.scatter(data2D_classes[:150, 0], data2D_classes[:150, 1], color='r', marker='o')
-plt.scatter(data2D_classes[150:, 0], data2D_classes[150:, 1], color='b', marker='o')
-plt.legend(('class 1','class 2'), loc='upper right', bbox_to_anchor=(1.05, 1.15))
+for i, j in enumerate(classes):
+    plt.scatter(data2D_classes[labels == j, 0], data2D_classes[labels == j, 1],
+                c = [matplotlib.colors.ListedColormap(('darkred', 'darkgreen'))(i)], label = j)
+plt.legend(('class 0','class 1'), loc='upper right', bbox_to_anchor=(1.05, 1.15))
 plt.grid(color='lightgray', linestyle='--', linewidth=0.5)
 plt.savefig('scatterplot-2D-classes.png', dpi = 250)
 plt.clf()
